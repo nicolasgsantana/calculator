@@ -23,7 +23,7 @@ const equationDisplay = document.getElementById("equation-display");
 
 
 function operate(x, operator, y) {
-    return OPERATIONS[operator](x, y);
+    return OPERATIONS[operator](x, y).toFixed(2);
 }
 
 function clear() {
