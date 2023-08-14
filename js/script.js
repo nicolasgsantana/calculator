@@ -31,7 +31,8 @@ function clear() {
     operator = "";
     secondNumber = "";
     result = "";
-    equationText = "0";
+    resultText = "0";
+    equationText = "";
     updateDisplay();
 }
 
