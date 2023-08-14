@@ -1,7 +1,10 @@
 let firstNumber = "";
 let operator = "";
 let secondNumber = "";
-let displayText = "0";
+let result = "";
+
+let equationText = "";
+let resultText = "";
 
 const OPERATIONS = {
     "+": (x, y) => x + y,
@@ -14,7 +17,9 @@ const numberBtns = Array.from(document.getElementsByClassName("number"));
 const operationBtns = Array.from(document.getElementsByClassName("operation"));
 const clearBtn = document.getElementById("clear");
 const equalsBtn = document.getElementById("equals");
-const display = document.getElementById("display");
+
+const resultDisplay = document.getElementById("result-display");
+const equationDisplay = document.getElementById("equation-display");
 
 
 function operate(x, operator, y) {
@@ -25,23 +30,42 @@ function clear() {
     firstNumber = "";
     operator = "";
     secondNumber = "";
-    displayText = "0";
+    result = "";
+    equationText = "0";
     updateDisplay();
 }
 
 function updateDisplay() {
-    display.textContent = displayText;
+    equationDisplay.textContent = equationText;
+    resultDisplay.textContent = resultText;
 }
+
+function getResult() {
+    result = operate(+firstNumber, operator, +secondNumber);
+}
+
+function getOperatorSymbol(operator) {
+    switch (operator) {
+        case "*":
+            return "x"
+        case "/":
+            return "÷"
+        default:
+            return operator;
+    }
+}
+
 
 numberBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        if (firstNumber === "" && operator === "") {
-            firstNumber = btn.value;
-            displayText = `${firstNumber}`;
+        if (operator === "") {
+            firstNumber += btn.value;
+            resultText = `${firstNumber}`;
         }
-        else if (secondNumber === "" && operator !== "") {
-            secondNumber = btn.value;
-            displayText = `${firstNumber} ${operator} ${secondNumber}`;
+        else if (operator !== "") {
+            secondNumber += btn.value;
+            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+            resultText = `${secondNumber}`;
         }
 
         updateDisplay();
@@ -52,7 +76,22 @@ operationBtns.forEach(btn => {
     btn.addEventListener('click', () => {
         if (firstNumber !== "" && operator === "") {
             operator = btn.value;
-            displayText = `${firstNumber} ${operator}`;
+            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+            resultText = "";
+        }
+
+        else if (secondNumber === "") {
+            operator = btn.value;
+            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+        }
+
+        else if (operator !== "" && secondNumber !== "") {
+            getResult();
+            firstNumber = result;
+            secondNumber = "";
+            operator = btn.value;
+            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+            resultText = "";
         }
 
         updateDisplay();
@@ -62,7 +101,14 @@ operationBtns.forEach(btn => {
 clearBtn.addEventListener('click', clear);
 
 equalsBtn.addEventListener('click', () => {
-    const result = operate(+firstNumber, operator, +secondNumber);
-    displayText = result;
-    updateDisplay();
+    if (secondNumber !== "") {
+        getResult();
+
+        equationText = equationText = `${firstNumber} ${getOperatorSymbol(operator)} ${secondNumber}`;
+        resultText = result;
+
+        firstNumber = result;
+        secondNumber = "";
+        updateDisplay();
+    }
 });
