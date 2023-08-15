@@ -6,6 +6,8 @@ let result = "";
 let equationText = "";
 let resultText = "";
 
+let alreadyHasDot = false;
+
 const OPERATIONS = {
     "+": (x, y) => x + y,
     "-": (x, y) => x - y,
@@ -17,6 +19,7 @@ const numberBtns = Array.from(document.getElementsByClassName("number"));
 const operationBtns = Array.from(document.getElementsByClassName("operation"));
 const clearBtn = document.getElementById("clear");
 const equalsBtn = document.getElementById("equals");
+const dotBtn = document.getElementById("dot");
 
 const resultDisplay = document.getElementById("result-display");
 const equationDisplay = document.getElementById("equation-display");
@@ -54,6 +57,10 @@ function getOperatorSymbol(operator) {
         default:
             return operator;
     }
+}
+
+function toggleDotBtn() {
+    alreadyHasDot = alreadyHasDot ? false : true;
 }
 
 
@@ -94,9 +101,39 @@ operationBtns.forEach(btn => {
             equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
             resultText = "";
         }
-
+        toggleDotBtn();
         updateDisplay();
     });
+});
+
+dotBtn.addEventListener('click', () => {
+
+    if (!alreadyHasDot) {
+        if (operator === "") {
+            if (firstNumber === "") {
+                firstNumber = "0.";
+            }
+            else {
+                firstNumber += ".";
+            }
+            resultText = `${firstNumber}`;
+            updateDisplay();
+            toggleDotBtn();
+        }
+
+        else if (operator !== "") {
+            if (secondNumber === "") {
+                secondNumber = "0.";
+            }
+            else {
+                secondNumber += ".";
+            }
+            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+            resultText = `${secondNumber}`;
+            updateDisplay();
+            toggleDotBtn();
+        }
+    }
 });
 
 clearBtn.addEventListener('click', clear);
@@ -110,6 +147,8 @@ equalsBtn.addEventListener('click', () => {
 
         firstNumber = result;
         secondNumber = "";
+
+        toggleDotBtn();
         updateDisplay();
     }
 });
