@@ -20,6 +20,7 @@ const operationBtns = Array.from(document.getElementsByClassName("operation"));
 const clearBtn = document.getElementById("clear");
 const equalsBtn = document.getElementById("equals");
 const dotBtn = document.getElementById("dot");
+const backspaceBtn = document.getElementById("backspace");
 
 const resultDisplay = document.getElementById("result-display");
 const equationDisplay = document.getElementById("equation-display");
@@ -150,6 +151,37 @@ equalsBtn.addEventListener('click', () => {
         secondNumber = "";
 
         toggleDotBtn();
+        updateDisplay();
+    }
+});
+
+backspaceBtn.addEventListener('click', () => {
+    if (operator === "" && result === "" && firstNumber !== "") {
+
+        let splittedStr = firstNumber.split("");
+
+        if (splittedStr[splittedStr.length - 1] === ".") {
+            toggleDotBtn();
+        }
+
+        splittedStr.pop();
+        firstNumber = splittedStr.join("");
+
+        resultText = `${firstNumber}`;
+        updateDisplay();
+    }
+
+    else if (operator !== "" && secondNumber !== "") {
+        let splittedStr = secondNumber.split("");
+
+        if (splittedStr[splittedStr.length - 1] === ".") {
+            toggleDotBtn();
+        }
+
+        splittedStr.pop();
+        secondNumber = splittedStr.join("");
+
+        resultText = `${secondNumber}`;
         updateDisplay();
     }
 });
