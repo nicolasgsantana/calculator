@@ -64,71 +64,51 @@ function toggleDotBtn() {
     alreadyHasDot = alreadyHasDot ? false : true;
 }
 
-function clickNumberBtn(key) {
-    let btn = numberBtns.reduce((searchedBtn, btn) => {
-        if (btn.value === key) {
-            searchedBtn = btn;
-            return searchedBtn;
-        }
-    }, null);
-    if (btn !== null) {
-        btn.click();
+function addNumber(value) {
+    if (operator === "" && result === "") {
+        firstNumber += value;
+        resultText = `${firstNumber}`;
     }
+    else if (operator !== "") {
+        secondNumber += value;
+        equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+        resultText = `${secondNumber}`;
+    }
+
+    updateDisplay();
 }
 
-function clickOperationBtn(key) {
-    let btn = operationBtns.reduce((searchedBtn, btn) => {
-        if (btn.value === key) {
-            searchedBtn = btn;
-            return searchedBtn;
-        }
-    }, null);
-    if (btn !== null) {
-        btn.click();
+function addOperator(value) {
+    if (firstNumber !== "" && operator === "") {
+        operator = value;
+        equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+        resultText = "";
     }
+
+    else if (secondNumber === "") {
+        operator = value;
+        equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+    }
+
+    else if (operator !== "" && secondNumber !== "") {
+        getResult();
+        firstNumber = result;
+        secondNumber = "";
+        operator = value;
+        equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
+        resultText = "";
+    }
+    toggleDotBtn();
+    updateDisplay();
 }
 
 
 numberBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (operator === "" && result === "") {
-            firstNumber += btn.value;
-            resultText = `${firstNumber}`;
-        }
-        else if (operator !== "") {
-            secondNumber += btn.value;
-            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
-            resultText = `${secondNumber}`;
-        }
-
-        updateDisplay();
-    });
+    btn.addEventListener('click', () => addNumber(btn.value));
 });
 
 operationBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        if (firstNumber !== "" && operator === "") {
-            operator = btn.value;
-            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
-            resultText = "";
-        }
-
-        else if (secondNumber === "") {
-            operator = btn.value;
-            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
-        }
-
-        else if (operator !== "" && secondNumber !== "") {
-            getResult();
-            firstNumber = result;
-            secondNumber = "";
-            operator = btn.value;
-            equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
-            resultText = "";
-        }
-        toggleDotBtn();
-        updateDisplay();
-    });
+    btn.addEventListener('click', () => addOperator(btn.value));
 });
 
 dotBtn.addEventListener('click', () => {
@@ -213,34 +193,34 @@ backspaceBtn.addEventListener('click', () => {
 document.addEventListener('keydown', e => {
     switch (e.key) {
         case ('0'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('1'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('2'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('3'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('4'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('5'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('6'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('7'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('8'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('9'):
-            clickNumberBtn(e.key);
+            addNumber(e.key);
             break;
         case ('Backspace'):
             backspaceBtn.click();
@@ -255,16 +235,16 @@ document.addEventListener('keydown', e => {
             dotBtn.click();
             break;
         case ('+'):
-            clickOperationBtn(e.key);
+            addOperator(e.key);
             break;
         case ('-'):
-            clickOperationBtn(e.key);
+            addOperator(e.key);
             break;
         case ('*'):
-            clickOperationBtn(e.key);
+            addOperator(e.key);
             break;
         case ('/'):
-            clickOperationBtn(e.key);
+            addOperator(e.key);
             break;
     }
 });
