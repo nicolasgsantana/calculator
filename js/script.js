@@ -26,7 +26,7 @@ const equationDisplay = document.getElementById("equation-display");
 
 
 function operate(x, operator, y) {
-    return OPERATIONS[operator](x, y).toFixed(2);
+    return Math.round((OPERATIONS[operator](x, y) + Number.EPSILON) * 100) / 100;
 }
 
 function clear() {
@@ -66,7 +66,7 @@ function toggleDotBtn() {
 
 numberBtns.forEach(btn => {
     btn.addEventListener('click', () => {
-        if (operator === "") {
+        if (operator === "" && result === "") {
             firstNumber += btn.value;
             resultText = `${firstNumber}`;
         }
@@ -109,7 +109,7 @@ operationBtns.forEach(btn => {
 dotBtn.addEventListener('click', () => {
 
     if (!alreadyHasDot) {
-        if (operator === "") {
+        if (operator === "" && result === "") {
             if (firstNumber === "") {
                 firstNumber = "0.";
             }
@@ -146,6 +146,7 @@ equalsBtn.addEventListener('click', () => {
         resultText = result;
 
         firstNumber = result;
+        operator = "";
         secondNumber = "";
 
         toggleDotBtn();
