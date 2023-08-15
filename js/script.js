@@ -64,6 +64,30 @@ function toggleDotBtn() {
     alreadyHasDot = alreadyHasDot ? false : true;
 }
 
+function clickNumberBtn(key) {
+    let btn = numberBtns.reduce((searchedBtn, btn) => {
+        if (btn.value === key) {
+            searchedBtn = btn;
+            return searchedBtn;
+        }
+    }, null);
+    if (btn !== null) {
+        btn.click();
+    }
+}
+
+function clickOperationBtn(key) {
+    let btn = operationBtns.reduce((searchedBtn, btn) => {
+        if (btn.value === key) {
+            searchedBtn = btn;
+            return searchedBtn;
+        }
+    }, null);
+    if (btn !== null) {
+        btn.click();
+    }
+}
+
 
 numberBtns.forEach(btn => {
     btn.addEventListener('click', () => {
@@ -183,5 +207,64 @@ backspaceBtn.addEventListener('click', () => {
 
         resultText = `${secondNumber}`;
         updateDisplay();
+    }
+});
+
+document.addEventListener('keydown', e => {
+    switch (e.key) {
+        case ('0'):
+            clickNumberBtn(e.key);
+            break;
+        case ('1'):
+            clickNumberBtn(e.key);
+            break;
+        case ('2'):
+            clickNumberBtn(e.key);
+            break;
+        case ('3'):
+            clickNumberBtn(e.key);
+            break;
+        case ('4'):
+            clickNumberBtn(e.key);
+            break;
+        case ('5'):
+            clickNumberBtn(e.key);
+            break;
+        case ('6'):
+            clickNumberBtn(e.key);
+            break;
+        case ('7'):
+            clickNumberBtn(e.key);
+            break;
+        case ('8'):
+            clickNumberBtn(e.key);
+            break;
+        case ('9'):
+            clickNumberBtn(e.key);
+            break;
+        case ('Backspace'):
+            backspaceBtn.click();
+            break;
+        case ('c'):
+            clearBtn.click();
+            break;
+        case ('='):
+            equalsBtn.click();
+            break;
+        case ('.'):
+            dotBtn.click();
+            break;
+        case ('+'):
+            clickOperationBtn(e.key);
+            break;
+        case ('-'):
+            clickOperationBtn(e.key);
+            break;
+        case ('*'):
+            clickOperationBtn(e.key);
+            break;
+        case ('/'):
+            clickOperationBtn(e.key);
+            break;
     }
 });
