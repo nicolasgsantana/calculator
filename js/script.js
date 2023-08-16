@@ -150,11 +150,14 @@ equalsBtn.addEventListener('click', () => {
         equationText = equationText = `${firstNumber} ${getOperatorSymbol(operator)} ${secondNumber}`;
         resultText = result;
 
+        if (secondNumber.toString().includes(".")) {
+            toggleDotBtn();
+        }
+
         firstNumber = result;
         operator = "";
         secondNumber = "";
 
-        toggleDotBtn();
         updateDisplay();
     }
 });
