@@ -154,11 +154,25 @@ equalsBtn.addEventListener('click', () => {
         equationText = equationText = `${firstNumber} ${getOperatorSymbol(operator)} ${secondNumber}`;
         resultText = result;
 
+        if (equationText.length > 28) {
+            equationText = "";
+        }
+
+        if (resultText.toString().length >= 16) {
+            equationText = "";
+            resultText = "err char limit";
+        }
+
         if (secondNumber.toString().includes(".")) {
             toggleDotBtn();
         }
 
-        firstNumber = result;
+        if (typeof (resultText) === 'number') {
+            firstNumber = result;
+        }
+        else {
+            firstNumber = "";
+        }
         operator = "";
         secondNumber = "";
 
