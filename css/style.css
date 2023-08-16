@@ -9,6 +9,7 @@ body {
     justify-content: center;
     flex-direction: column;
     font-family: 'Roboto Mono', monospace;
+    background-color: #07020D;
 }
 
 main {
@@ -22,10 +23,25 @@ button {
     height: 80px;
     font-size: x-large;
     font-family: 'Roboto Mono', monospace;
+    background-color:#87F6FF;
+    border: #07020D solid 2px;
+    border-radius: 8px;
+}
+
+button:hover {
+    filter: brightness(85%);
+}
+
+button:active {
+    filter: brightness(75%);
 }
 
 button.equals, button.clear{
     flex-grow: 1;
+}
+
+button.operation, button.equals, button.clear, button.backspace {
+    background-color: #FFFD82;
 }
 
 p {
@@ -60,6 +76,7 @@ div.base {
 div.display {
     padding: 8px;
     background-color: #ADFC92;
+    border: #07020D solid 2px;
     border-radius: 8px;
 }
 
@@ -75,7 +92,16 @@ div.row {
 }
 
 footer {
+    color:whitesmoke;
     margin: auto 0 ;
     text-align: center;
 }
 
+a {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
