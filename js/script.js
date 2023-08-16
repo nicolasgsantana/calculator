@@ -102,7 +102,10 @@ function addOperator(value) {
         equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
         resultText = "";
     }
-    toggleDotBtn();
+    if (alreadyHasDot) {
+        toggleDotBtn();
+    }
+
     updateDisplay();
 }
 
