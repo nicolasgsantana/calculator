@@ -66,11 +66,15 @@ function toggleDotBtn() {
 
 function addNumber(value) {
     if (operator === "" && result === "") {
-        firstNumber += value;
+        if (firstNumber.length < 16) {
+            firstNumber += value;
+        }
         resultText = `${firstNumber}`;
     }
     else if (operator !== "") {
-        secondNumber += value;
+        if (secondNumber.length < 16) {
+            secondNumber += value;
+        }
         equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
         resultText = `${secondNumber}`;
     }
