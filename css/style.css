@@ -7,7 +7,14 @@ body {
     padding: 0;
     display: flex;
     justify-content: center;
+    flex-direction: column;
     font-family: 'Roboto Mono', monospace;
+}
+
+main {
+    margin-top: auto;
+    display: flex;
+    justify-content: center;
 }
 
 button {
@@ -44,7 +51,7 @@ div.base {
     margin-top: auto;
     padding: 16px;
     border-radius: 8px;
-    background-color: grey;
+    background-color: #C0BABC;
     display: flex;
     flex-direction: column;
     gap: 16px;
@@ -52,7 +59,7 @@ div.base {
 
 div.display {
     padding: 8px;
-    background-color: lightgreen;
+    background-color: #ADFC92;
     border-radius: 8px;
 }
 
@@ -65,5 +72,10 @@ div.center {
 div.row {
     display: flex;
     gap: 4px;
+}
+
+footer {
+    margin: auto 0 ;
+    text-align: center;
 }
 
