@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@700&display=swap');
 
 body {
+    width: 100vw;
+    height: 100vh;
     margin: 0;
     padding: 0;
     display: flex;
+    justify-content: center;
     font-family: 'Roboto Mono', monospace;
 }
 
@@ -21,28 +24,46 @@ button.equals, button.clear{
 p {
     margin: 0;
     padding: 0;
+    text-align: right;
 }
 
 p.equation {
     font-size: x-large;
+    min-height: 32px;
 }
 
 p.result {
     font-size: xx-large;
+    min-height: 43px;
 }
 
 div.base {
     width: auto;
-    height: 400px;
+    height: auto;
+    margin-bottom: auto;
+    margin-top: auto;
+    padding: 16px;
+    border-radius: 8px;
+    background-color: grey;
     display: flex;
     flex-direction: column;
+    gap: 16px;
+}
+
+div.display {
+    padding: 8px;
+    background-color: lightgreen;
+    border-radius: 8px;
 }
 
 div.center {
     display: flex;
     flex-direction: column;
+    gap: 4px;
 }
 
 div.row {
     display: flex;
+    gap: 4px;
 }
+
