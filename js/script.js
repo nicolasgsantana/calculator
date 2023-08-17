@@ -89,7 +89,7 @@ function addOperator(value) {
         resultText = "";
     }
 
-    else if (secondNumber === "") {
+    else if (secondNumber === "" && firstNumber !== "") {
         operator = value;
         equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
     }
@@ -102,6 +102,7 @@ function addOperator(value) {
         equationText = `${firstNumber} ${getOperatorSymbol(operator)}`;
         resultText = "";
     }
+
     if (alreadyHasDot) {
         toggleDotBtn();
     }
